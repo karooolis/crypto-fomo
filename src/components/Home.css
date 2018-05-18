@@ -1,0 +1,19 @@
+.header {
+  font-size: 4rem;
+  line-height: 4rem;
+  margin: 0 0 3rem 0;
+}
+
+.header-img {
+  width: 70px;
+}
+
+.filler {
+  margin: 0.75rem 0 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .filler {
+    margin: 0;
+  }
+}

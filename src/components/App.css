@@ -55,7 +55,7 @@ select {
 }
 
 button {
-  margin-top: 3rem;
+  margin-top: 2rem;
   height: 80px;
   background-color: #fff;
   border: 3px solid #333;
@@ -65,24 +65,4 @@ button {
 
 :global(.text-center) {
   text-align: center;
-}
-
-.header {
-  font-size: 4rem;
-  line-height: 4rem;
-  margin: 0 0 2.3rem 0;
-}
-
-.header-img {
-  width: 70px;
-}
-
-.filler {
-  margin: 0.75rem 0 0.5rem;
-}
-
-@media (min-width: 768px) {
-  .filler {
-    margin: 0;
-  }
 }

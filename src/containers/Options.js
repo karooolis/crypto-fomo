@@ -42,7 +42,7 @@ class Options extends Component {
             key={coin.id}
             onClick={() => {
               this.setState({ cards: [], clicked: true });
-              this.props.onClick(coin.symbol);
+              this.props.onClick(coin.name);
             }}
           >
             <p className={styles.name}>{coin.name}</p>

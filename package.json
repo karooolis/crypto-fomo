@@ -37,6 +37,7 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-grid-system": "^3.2.3",
+    "react-router-dom": "^4.2.2",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
@@ -52,9 +53,16 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
-    "testMatch": ["<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}", "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
+      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+    ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
@@ -62,14 +70,26 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
-    "moduleFileExtensions": ["web.js", "js", "json", "web.jsx", "jsx", "node", "mjs"]
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node",
+      "mjs"
+    ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
