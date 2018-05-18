@@ -1,0 +1,19 @@
+.list {
+  padding-bottom: 1rem;
+}
+
+.card {
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.name,
+.symbol {
+  padding: 5px 10px;
+  font-size: 0.75rem;
+}
