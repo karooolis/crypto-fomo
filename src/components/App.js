@@ -53,13 +53,13 @@ class App extends Component {
             <div className={styles.filler}>on</div>
           </Col>
           <Col sm={4}>
-            <input type="date" name="day" value={this.state.day} required="" onChange={this.handleChange} />
+            <input type="date" name="day" value={this.state.day} onChange={this.handleChange} />
           </Col>
         </Row>
 
         <Row>
           <Col md={3} push={{ md: 4 }}>
-            <Options coin={this.state.coin} coins={this.state.coins} />
+            <Options coin={this.state.coin} coins={this.state.coins} onClick={coin => this.setState({ coin })} />
           </Col>
 
           <Col md={4} push={{ md: 5 }}>
