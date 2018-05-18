@@ -10,8 +10,6 @@ class Home extends Component {
   state = { coins: [], coin: 'Bitcoin', date: '2018-05-26', amount: '1000' };
 
   componentDidMount = () => {
-    // https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=1516658836&extraParams=cryptofomo
-
     fetch('https://api.coinmarketcap.com/v2/listings/')
       .then(res => res.json())
       .then(json => this.setState({ coins: json.data }))

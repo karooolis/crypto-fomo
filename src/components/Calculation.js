@@ -7,27 +7,23 @@ class Calculation extends Component {
   state = { coins: [], coin: 'Bitcoin', date: '2018-05-26', amount: '1000' };
 
   componentDidMount = () => {
-    // https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=1516658836&extraParams=cryptofomo
+    const {
+      match: { params },
+    } = this.props;
 
-    fetch('https://api.coinmarketcap.com/v2/listings/')
+    console.log(params);
+
+    fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${params.coin}&tsyms=USD&ts=1516658836&extraParams=cryptofomo`)
       .then(res => res.json())
-      .then(json => this.setState({ coins: json.data }))
+      .then(json => console.log(json))
       .catch(err => console.log(err));
   };
 
-  handleChange = event => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleSubmit = () => {};
-
   render() {
+    const {
+      match: { params },
+    } = this.props;
+
     return (
       <div>
         <div className={styles['money-container']}>
@@ -59,8 +55,8 @@ class Calculation extends Component {
         <Row>
           <Col>
             <h1 className={styles.header}>
-              Investing <span className={styles.span}>$1000</span> in <span className={styles.span}>Bitcoin</span> on{' '}
-              <span className={styles.span}>Jan 1st, 2010</span> would have yielded <span className={styles.span}>$1364.75</span> which is a{' '}
+              Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
+              <span className={styles.span}>{params.date}</span> would have yielded <span className={styles.span}>$1364.75</span> which is a{' '}
               <span className={styles.span}>236.48%</span> on ROI.
             </h1>
           </Col>

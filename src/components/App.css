@@ -57,7 +57,7 @@ select {
 button {
   margin-top: 3rem;
   height: 80px;
-  background-color: #fff;
+  background-color: transparent;
   border: 3px solid #333;
   width: 100%;
   cursor: pointer;
