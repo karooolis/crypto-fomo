@@ -5,6 +5,12 @@
   margin: 0 0 3rem 0;
 }
 
+.header-wrong {
+  font-size: 4rem;
+  line-height: 6rem;
+  margin: 0 0 3rem 0;
+}
+
 .span {
   border-bottom: 10px solid #333;
 }
