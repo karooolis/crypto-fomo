@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Container, Row, Col } from 'react-grid-system';
+import Footer from './Footer';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <h1>If I had Invested</h1>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col sm={3}>
+            $ <input type="number" className="amount" value="1000" />
+          </Col>
+          <Col sm={1}>in</Col>
+          <Col sm={3}>
+            <input type="text" className="amount" value="Bitcoin" />
+          </Col>
+          <Col sm={1}>on</Col>
+          <Col sm={4}>
+            <input type="number" className="amount" value="1000" />
+          </Col>
+        </Row>
+
+        <Footer />
+      </Container>
     );
   }
 }
