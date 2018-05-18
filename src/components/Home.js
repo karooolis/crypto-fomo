@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
-import InputAmount from '../containers/InputAmount';
+import { Link } from 'react-router-dom';
 import Options from '../containers/Options';
+import Footer from '../containers/Footer';
 import money from '../img/money.png';
 import styles from './Home.css';
 
 class Home extends Component {
-  state = { coins: [], coin: 'Bitcoin', day: '2018-05-26' };
+  state = { coins: [], coin: 'Bitcoin', date: '2018-05-26', amount: '1000' };
 
   componentDidMount = () => {
     // https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=1516658836&extraParams=cryptofomo
@@ -41,7 +42,8 @@ class Home extends Component {
 
         <Row>
           <Col sm={3}>
-            <InputAmount />
+            <span className={styles.dollar}>$</span>
+            <input type="number" name="amount" className={styles.input} value={this.state.amount} onChange={this.handleChange} />
           </Col>
           <Col sm={1} className="text-center">
             <div className={styles.filler}>in</div>
@@ -54,7 +56,7 @@ class Home extends Component {
             <div className={styles.filler}>on</div>
           </Col>
           <Col sm={4}>
-            <input type="date" name="day" value={this.state.day} onChange={this.handleChange} />
+            <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
           </Col>
         </Row>
 
@@ -64,9 +66,13 @@ class Home extends Component {
           </Col>
 
           <Col md={4} push={{ md: 5 }}>
-            <button type="button">submit</button>
+            <Link to={`/${this.state.amount}/${this.state.date}/${this.state.coin}`}>
+              <button type="button">submit</button>
+            </Link>
           </Col>
         </Row>
+
+        <Footer />
       </div>
     );
   }

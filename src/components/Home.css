@@ -1,11 +1,21 @@
 .header {
   font-size: 4rem;
-  line-height: 4rem;
+  line-height: 6rem;
   margin: 0 0 3rem 0;
 }
 
 .header-img {
   width: 70px;
+}
+
+.input {
+  width: 90%;
+}
+
+.dollar {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
 }
 
 .filler {
