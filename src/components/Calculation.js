@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import { fetchCoin } from '../actions';
+import { fetchCoin, dispatchError } from '../actions';
 import styles from './Calculation.css';
 
 class Calculation extends Component {
@@ -23,6 +23,12 @@ class Calculation extends Component {
 
     const date = new Date(params.date);
     const ts = Math.floor(date / 1000);
+
+    if (ts > Math.floor(new Date() / 1000)) {
+      this.props.dispatchError('Future dates are invalid');
+      return;
+    }
+
     const coin = _.find(this.props.coins, { name: params.coin });
 
     this.props.fetchCoin(coin.symbol, ts);
@@ -92,7 +98,9 @@ class Calculation extends Component {
 
     return (
       <div>
-        <div className={`${styles['money-container']} ${this.state.roi >= 0 ? styles.success : styles.failure}`}>
+        <div
+          className={`${styles['money-container']} ${this.state.roi !== 0 ? (this.state.roi > 0 ? styles.success : styles.failure) : null}`}
+        >
           <div className={styles['falling-money']}>
             <span className={styles['falling-money-span']} />
             <span className={styles['falling-money-span']} />
@@ -133,6 +141,6 @@ class Calculation extends Component {
 }
 
 const mapStateToProps = ({ coins, coin, error }) => ({ coins, coin, error });
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoin }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoin, dispatchError }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calculation);
