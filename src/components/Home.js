@@ -7,7 +7,7 @@ import money from '../img/money.png';
 import styles from './Home.css';
 
 class Home extends Component {
-  state = { coins: [], coin: 'Bitcoin', date: '2018-05-26', amount: '1000' };
+  state = { coins: [], coin: 'Bitcoin', date: '2017-01-01', amount: '1000' };
 
   handleChange = event => {
     const target = event.target;

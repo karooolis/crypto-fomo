@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import { fetchCoin, dispatchError } from '../actions';
+import { fetchCoin, dispatchError, receiveCoin } from '../actions';
 import styles from './Calculation.css';
 
 class Calculation extends Component {
@@ -62,6 +62,18 @@ class Calculation extends Component {
     }
   };
 
+  componentWillUnmount() {
+    this.setState({
+      roi: 0,
+      netProfit: 0,
+      coinsFetched: false,
+      roiCalculated: false,
+    });
+
+    this.props.receiveCoin(null, null);
+    this.props.dispatchError(null);
+  }
+
   render() {
     const {
       match: { params },
@@ -86,7 +98,7 @@ class Calculation extends Component {
             <h1 className={styles.header}>
               Phew. I got lucky! 🎉 Investing <span className={styles.span}>${params.amount}</span> in{' '}
               <span className={styles.span}>{params.coin}</span> on <span className={styles.span}>{params.date}</span> would have made me
-              lose <span className={styles.span}>${(parseFloat(params.amount) - this.state.totalValue).toFixed(2)}</span>. That's a{' '}
+              lose <span className={styles.span}>{this.state.netProfit}</span> bucks. That's a{' '}
               <span className={styles.span}>{this.state.roi}%</span> loss.
             </h1>
           );
@@ -141,6 +153,6 @@ class Calculation extends Component {
 }
 
 const mapStateToProps = ({ coins, coin, error }) => ({ coins, coin, error });
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoin, dispatchError }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoin, dispatchError, receiveCoin }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calculation);
