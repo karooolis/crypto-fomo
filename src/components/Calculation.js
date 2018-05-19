@@ -59,6 +59,8 @@ class Calculation extends Component {
 
     if (this.props.coin.past && this.props.coin.current && !this.state.roiCalculated) {
       this.calculateRoi();
+    } else if (this.props.coin.past === 0 || this.props.coin.current === 0) {
+      this.props.dispatchError('Date too early');
     }
   };
 
@@ -80,31 +82,29 @@ class Calculation extends Component {
     } = this.props;
 
     let header;
-    if (!this.props.coins.length) {
+    if (this.props.error) {
+      header = <h1 className={styles['header-wrong']}>Hmm. Data not available 🙅 Sorry!</h1>;
+    } else if (!this.state.coinsFetched || !this.state.roiCalculated) {
       header = <h1 className={styles.header}>Loading...</h1>;
     } else {
-      if (!this.props.error) {
-        if (this.state.roi >= 0) {
-          header = (
-            <h1 className={styles.header}>
-              Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
-              <span className={styles.span}>{params.date}</span> would have made me{' '}
-              <span className={styles.span}>${this.state.netProfit}</span> which is a <span className={styles.span}>{this.state.roi}%</span>{' '}
-              on ROI.
-            </h1>
-          );
-        } else {
-          header = (
-            <h1 className={styles.header}>
-              Phew. I got lucky! 🎉 Investing <span className={styles.span}>${params.amount}</span> in{' '}
-              <span className={styles.span}>{params.coin}</span> on <span className={styles.span}>{params.date}</span> would have made me
-              lose <span className={styles.span}>{this.state.netProfit}</span> bucks. That's a{' '}
-              <span className={styles.span}>{this.state.roi}%</span> loss.
-            </h1>
-          );
-        }
+      if (this.state.roi >= 0) {
+        header = (
+          <h1 className={styles.header}>
+            Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
+            <span className={styles.span}>{params.date}</span> would have made me{' '}
+            <span className={styles.span}>${this.state.netProfit}</span> which is a <span className={styles.span}>{this.state.roi}%</span>{' '}
+            on ROI.
+          </h1>
+        );
       } else {
-        header = <h1 className={styles['header-wrong']}>Hmm. Data not available 🙅 Sorry!</h1>;
+        header = (
+          <h1 className={styles.header}>
+            Phew. I got lucky! 🎉 Investing <span className={styles.span}>${params.amount}</span> in{' '}
+            <span className={styles.span}>{params.coin}</span> on <span className={styles.span}>{params.date}</span> would have made me lose{' '}
+            <span className={styles.span}>{this.state.netProfit}</span> bucks. That's a{' '}
+            <span className={styles.span}>{this.state.roi}%</span> loss.
+          </h1>
+        );
       }
     }
 
