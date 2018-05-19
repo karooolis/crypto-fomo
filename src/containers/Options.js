@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
 import styles from './Options.css';
 
 class Options extends Component {
+  constructor(props) {
+    super(props);
+
+    if (this.props.coins.length) {
+      this.init();
+    }
+  }
+
   state = { cards: [], clicked: false };
 
   init = () => {
@@ -54,4 +63,6 @@ class Options extends Component {
   }
 }
 
-export default Options;
+const mapStateToProps = ({ coins }) => ({ coins });
+
+export default connect(mapStateToProps)(Options);

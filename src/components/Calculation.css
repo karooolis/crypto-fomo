@@ -35,6 +35,14 @@
   left: 0%;
 }
 
+.success {
+  background: #00ffa2;
+}
+
+.failure {
+  background: #ff1f79;
+}
+
 .falling-money {
   text-align: center;
 }

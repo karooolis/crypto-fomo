@@ -9,13 +9,6 @@ import styles from './Home.css';
 class Home extends Component {
   state = { coins: [], coin: 'Bitcoin', date: '2018-05-26', amount: '1000' };
 
-  componentDidMount = () => {
-    fetch('https://api.coinmarketcap.com/v2/listings/')
-      .then(res => res.json())
-      .then(json => this.setState({ coins: json.data }))
-      .catch(err => console.log(err));
-  };
-
   handleChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -58,7 +51,7 @@ class Home extends Component {
 
         <Row>
           <Col md={3} push={{ md: 4 }}>
-            <Options coin={this.state.coin} coins={this.state.coins} onClick={coin => this.setState({ coin })} />
+            <Options coin={this.state.coin} onClick={coin => this.setState({ coin })} />
           </Col>
 
           <Col md={4} push={{ md: 5 }}>
