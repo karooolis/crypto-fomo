@@ -8,7 +8,7 @@ class Options extends Component {
   init = () => {
     const options = {
       shouldSort: true,
-      threshold: 0,
+      threshold: 0.2,
       keys: ['name', 'symbol'],
     };
     this.fuse = new Fuse(this.props.coins, options);

@@ -26,8 +26,6 @@ class Home extends Component {
     });
   };
 
-  handleSubmit = () => {};
-
   render() {
     return (
       <div>

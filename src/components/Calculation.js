@@ -11,13 +11,11 @@ class Calculation extends Component {
       match: { params },
     } = this.props;
 
-    console.log(params);
-
     fetch(`https://min-api.cryptocompare.com/data/pricehistorical?fsym=${params.coin}&tsyms=USD&ts=1516658836&extraParams=cryptofomo`)
       .then(res => res.json())
       .then(json => {
-        console.log(json.data.length);
-        this.setState({ loading: true });
+        console.log(json[params.coin].USD);
+        this.setState({ loading: false });
       })
       .catch(err => this.setState({ loading: false, error: true }));
   };
@@ -27,8 +25,21 @@ class Calculation extends Component {
       match: { params },
     } = this.props;
 
+    let header;
     if (this.state.loading) {
-      return <h1>Loading...</h1>;
+      header = <h1 className={styles.header}>Loading...</h1>;
+    } else {
+      if (!this.state.error) {
+        header = (
+          <h1 className={styles.header}>
+            Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
+            <span className={styles.span}>{params.date}</span> would have yielded <span className={styles.span}>$1364.75</span> which is a{' '}
+            <span className={styles.span}>236.48%</span> on ROI.
+          </h1>
+        );
+      } else {
+        header = <h1 className={styles['header-wrong']}>Hmm. Data not available 🙅 Sorry!</h1>;
+      }
     }
 
     return (
@@ -52,25 +63,11 @@ class Calculation extends Component {
             <span className={styles['falling-money-span']} />
             <span className={styles['falling-money-span']} />
             <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
           </div>
         </div>
 
         <Row>
-          <Col>
-            {!this.state.error ? (
-              <h1 className={styles.header}>
-                Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
-                <span className={styles.span}>{params.date}</span> would have yielded <span className={styles.span}>$1364.75</span> which is
-                a <span className={styles.span}>236.48%</span> on ROI.
-              </h1>
-            ) : (
-              <h1 className={styles['header-wrong']}>Hmm. Data not available 🙅 Sorry!</h1>
-            )}
-          </Col>
+          <Col>{header}</Col>
         </Row>
 
         <Row>
