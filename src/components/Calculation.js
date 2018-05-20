@@ -9,6 +9,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 import { fetchCoin, dispatchError, receiveCoin } from '../actions';
 import FallingMoney from '../containers/FallingMoney';
+import Affiliate from '../containers/Affiliate';
 import styles from './Calculation.css';
 
 fontawesome.library.add(faTwitter);
@@ -93,14 +94,14 @@ class Calculation extends Component {
       return <h1 className={styles.header}>Loading...</h1>;
     } else {
       if (this.state.roi >= 0) {
-        const twitterStr = `Investing $${params.amount} in ${params.coin} on 📅 ${params.date} would have made me $${
+        const twitterStr = `Investing $${params.amount} in ${params.coin} on 📅 ${params.date} would have made $${
           this.state.netProfit
         } 💸 which is a ${this.state.roi}% on ROI 📈 See more on ${window.location.href} 🎉 #FOMO #${params.coin} #crypto #ToTheMoon`;
 
         return (
           <h1 className={styles.header}>
             Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
-            <span className={styles.span}>{params.date}</span> would have made me{' '}
+            <span className={styles.span}>{params.date}</span> would have made{' '}
             <span className={styles.span}>${this.state.netProfit} 💸</span> which is a{' '}
             <span className={styles.span}>{this.state.roi}% 📈</span> on ROI.
             <a
@@ -152,6 +153,12 @@ class Calculation extends Component {
                 See another
               </button>
             </Link>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <Affiliate />
           </Col>
         </Row>
       </div>

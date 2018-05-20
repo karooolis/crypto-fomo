@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
-import Options from '../containers/Options';
 import money from '../img/money.png';
+import Options from '../containers/Options';
+import Footer from '../containers/Footer';
 import styles from './Home.css';
 
 class Home extends Component {
@@ -59,6 +60,8 @@ class Home extends Component {
             </Link>
           </Col>
         </Row>
+
+        <Footer />
       </div>
     );
   }

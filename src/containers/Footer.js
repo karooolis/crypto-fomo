@@ -7,10 +7,15 @@ const Footer = () => {
     <Row className={styles.footer}>
       <Col md={4} push={{ md: 8 }}>
         <p>
-          Inspired by <a href="http://www.extremefomo.com/">Extreme Fomo</a>
+          Inspired by{' '}
+          <a href="http://www.extremefomo.com/" target="_blank">
+            Extreme Fomo
+          </a>
         </p>
         <p>
-          <a href="https://twitter.com/superkarolis">@superkarolis</a>
+          <a href="https://twitter.com/superkarolis" target="_blank">
+            @superkarolis
+          </a>
         </p>
       </Col>
     </Row>
