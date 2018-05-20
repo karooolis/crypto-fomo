@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { Container } from 'react-grid-system';
 import Home from './Home';
 import Calculation from './Calculation';
+import Footer from '../containers/Footer';
 import './App.css';
 
 const App = () => {
@@ -15,6 +16,8 @@ const App = () => {
 
           <Redirect to="/" />
         </Switch>
+
+        <Footer />
       </Container>
     </Router>
   );

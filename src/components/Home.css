@@ -18,6 +18,13 @@
   text-align: center;
 }
 
+.example {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: gray;
+  font-weight: 300;
+}
+
 .filler {
   margin: 0.75rem 0 0.5rem;
 }

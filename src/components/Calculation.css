@@ -27,99 +27,12 @@
   }
 }
 
-.money-container {
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0%;
+.header .svg {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.5rem;
 }
 
-.success {
-  background: #00ffa2;
-}
-
-.failure {
-  background: #ff1f79;
-}
-
-.falling-money {
-  text-align: center;
-}
-
-.falling-money-span {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin: -280px 40px 54px -34px;
-  background: url(../img/money.png);
-  background-size: contain;
-  -webkit-animation: fallingMoney 10s infinite linear;
-  -moz-animation: fallingMoney 10s infinite linear;
-}
-
-.falling-money-span:nth-child(5n + 5) {
-  -webkit-animation-delay: 1.3s;
-  -moz-animation-delay: 1.3s;
-}
-.falling-money-span:nth-child(3n + 2) {
-  -webkit-animation-delay: 1.5s;
-  -moz-animation-delay: 1.5s;
-}
-.falling-money-span:nth-child(2n + 5) {
-  -webkit-animation-delay: 1.7s;
-  -moz-animation-delay: 1.7s;
-}
-
-.falling-money-span:nth-child(3n + 10) {
-  -webkit-animation-delay: 2.7s;
-  -moz-animation-delay: 2.7s;
-}
-.falling-money-span:nth-child(7n + 2) {
-  -webkit-animation-delay: 3.5s;
-  -moz-animation-delay: 3.5s;
-}
-.falling-money-span:nth-child(4n + 5) {
-  -webkit-animation-delay: 5.5s;
-  -moz-animation-delay: 5.5s;
-}
-.falling-money-span:nth-child(3n + 7) {
-  -webkit-animation-delay: 8s;
-  -moz-animation-delay: 8s;
-}
-
-@-webkit-keyframes fallingMoney {
-  0% {
-    opacity: 1;
-
-    -webkit-transform: translate(0, 0px) rotateZ(0deg);
-  }
-  75% {
-    opacity: 1;
-
-    -webkit-transform: translate(100px, 600px) rotateZ(270deg);
-  }
-  100% {
-    opacity: 0;
-
-    -webkit-transform: translate(150px, 800px) rotateZ(360deg);
-  }
-}
-
-@-moz-keyframes fallingMoney {
-  0% {
-    opacity: 1;
-
-    -webkit-transform: translate(0, 0px) rotateZ(0deg);
-  }
-  75% {
-    opacity: 1;
-
-    -webkit-transform: translate(100px, 600px) rotateZ(270deg);
-  }
-  100% {
-    opacity: 0;
-
-    -webkit-transform: translate(150px, 800px) rotateZ(360deg);
-  }
+svg path {
+  color: #00aced;
 }

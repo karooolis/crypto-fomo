@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
 import Options from '../containers/Options';
-import Footer from '../containers/Footer';
 import money from '../img/money.png';
 import styles from './Home.css';
 
@@ -37,9 +36,9 @@ class Home extends Component {
           <Col sm={1} className="text-center">
             <div className={styles.filler}>in</div>
           </Col>
-          <Col sm={3}>
+          <Col sm={3} className="text-center">
             <input type="text" name="coin" value={this.state.coin} onChange={this.handleChange} />
-            <p className="example">Example - BTC, Bitcoin</p>
+            <p className={styles.example}>Example - BTC, Bitcoin</p>
           </Col>
           <Col sm={1} className="text-center">
             <div className={styles.filler}>on</div>
@@ -60,8 +59,6 @@ class Home extends Component {
             </Link>
           </Col>
         </Row>
-
-        <Footer />
       </div>
     );
   }

@@ -3,9 +3,15 @@ import { Row, Col } from 'react-grid-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import fontawesome from '@fortawesome/fontawesome';
+import { faTwitter } from '@fortawesome/fontawesome-free-brands';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 import { fetchCoin, dispatchError, receiveCoin } from '../actions';
+import FallingMoney from '../containers/FallingMoney';
 import styles from './Calculation.css';
+
+fontawesome.library.add(faTwitter);
 
 class Calculation extends Component {
   state = { roi: 0, netProfit: 0, coinsFetched: false, roiCalculated: false };
@@ -76,66 +82,67 @@ class Calculation extends Component {
     this.props.dispatchError(null);
   }
 
-  render() {
+  renderHeader() {
     const {
       match: { params },
     } = this.props;
 
-    let header;
     if (this.props.error) {
-      header = <h1 className={styles['header-wrong']}>Hmm. Data not available 🙅 Sorry!</h1>;
+      return <h1 className={styles['header-wrong']}>Hmm. Data not available 🙅 Sorry!</h1>;
     } else if (!this.state.coinsFetched || !this.state.roiCalculated) {
-      header = <h1 className={styles.header}>Loading...</h1>;
+      return <h1 className={styles.header}>Loading...</h1>;
     } else {
       if (this.state.roi >= 0) {
-        header = (
+        const twitterStr = `Investing $${params.amount} in ${params.coin} on 📅 ${params.date} would have made me $${
+          this.state.netProfit
+        } 💸 which is a ${this.state.roi}% on ROI 📈 See more on ${window.location.href} 🎉 #FOMO #${params.coin} #crypto #ToTheMoon`;
+
+        return (
           <h1 className={styles.header}>
             Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
             <span className={styles.span}>{params.date}</span> would have made me{' '}
-            <span className={styles.span}>${this.state.netProfit}</span> which is a <span className={styles.span}>{this.state.roi}%</span>{' '}
-            on ROI.
+            <span className={styles.span}>${this.state.netProfit} 💸</span> which is a{' '}
+            <span className={styles.span}>{this.state.roi}% 📈</span> on ROI.
+            <a
+              className="twitter-share-button"
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
+              target="_blank"
+            >
+              <FontAwesomeIcon className={styles.svg} icon={['fab', 'twitter']} />
+            </a>
           </h1>
         );
       } else {
-        header = (
+        const twitterStr = `Phew. I got lucky! 🎉 Investing $${params.amount} in ${params.coin} on {params.date} would have made me lose ${
+          this.state.netProfit
+        } bucks 💸 That's a ${this.state.roi}% loss 📉 See more on ${window.location.href} #FOMO #${params.coin} #crypto #CryptoBubble`;
+
+        return (
           <h1 className={styles.header}>
             Phew. I got lucky! 🎉 Investing <span className={styles.span}>${params.amount}</span> in{' '}
             <span className={styles.span}>{params.coin}</span> on <span className={styles.span}>{params.date}</span> would have made me lose{' '}
-            <span className={styles.span}>{this.state.netProfit}</span> bucks. That's a{' '}
-            <span className={styles.span}>{this.state.roi}%</span> loss.
+            <span className={styles.span}>{Math.abs(this.state.netProfit)}</span> bucks. That's a{' '}
+            <span className={styles.span}>{this.state.roi}%</span> loss.{' '}
+            <a
+              className="twitter-share-button"
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
+              target="_blank"
+            >
+              <FontAwesomeIcon className={styles.svg} icon={['fab', 'twitter']} />
+            </a>
           </h1>
         );
       }
     }
+  }
 
+  render() {
     return (
       <div>
-        <div
-          className={`${styles['money-container']} ${this.state.roi !== 0 ? (this.state.roi > 0 ? styles.success : styles.failure) : null}`}
-        >
-          <div className={styles['falling-money']}>
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-            <span className={styles['falling-money-span']} />
-          </div>
-        </div>
+        <FallingMoney roi={this.state.roi} />
 
         <Row>
-          <Col>{header}</Col>
+          <Col>{this.renderHeader()}</Col>
         </Row>
 
         <Row>
