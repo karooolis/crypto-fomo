@@ -94,9 +94,9 @@ class Calculation extends Component {
       return <h1 className={styles.header}>Loading...</h1>;
     } else {
       if (this.state.roi >= 0) {
-        const twitterStr = `Investing $${params.amount} in ${params.coin} on 📅 ${params.date} would have made $${
+        const twitterStr = `Investing $${params.amount} in ${params.coin} on 📅${params.date} would have made $${
           this.state.netProfit
-        } 💸 which is a ${this.state.roi}% on ROI 📈 See more on ${window.location.href} 🎉 #FOMO #${params.coin} #crypto #ToTheMoon`;
+        } 💸which is a ${this.state.roi}% on ROI 📈See more on ${window.location.href} 🎉#FOMO #${params.coin} #crypto #ToTheMoon`;
 
         return (
           <h1 className={styles.header}>
@@ -114,9 +114,11 @@ class Calculation extends Component {
           </h1>
         );
       } else {
-        const twitterStr = `Phew. I got lucky! 🎉 Investing $${params.amount} in ${params.coin} on {params.date} would have made me lose ${
-          this.state.netProfit
-        } bucks 💸 That's a ${this.state.roi}% loss 📉 See more on ${window.location.href} #FOMO #${params.coin} #crypto #CryptoBubble`;
+        const twitterStr = `Phew. I got lucky! 🎉Investing $${params.amount} in ${params.coin} on 📅$
+          {params.date
+        } would have made me lose ${this.state.netProfit} bucks 💸That's a ${this.state.roi}% loss 📉See more on ${
+          window.location.href
+        } #FOMO #${params.coin} #crypto #CryptoBubble`;
 
         return (
           <h1 className={styles.header}>
