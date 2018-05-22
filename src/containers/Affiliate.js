@@ -7,8 +7,8 @@ const Affiliate = () => {
       <marquee direction="right">
         <p>
           👉{' '}
-          <a href="https://n.exchange/?ref=RRVQKYQ8PQV" target="_blank">
-            <span className={styles.link}>Buy cryptocurrencies with the cheapest rates</span> 💰
+          <a href="bit.ly/2KGoLgg" target="_blank">
+            <span className={styles.link}>Buy Bitcoin with a credit card</span> 💰
           </a>
         </p>
       </marquee>
