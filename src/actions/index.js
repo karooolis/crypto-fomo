@@ -15,6 +15,12 @@ export const receiveCoin = (past, current) => ({
   },
 });
 
+export const RECEIVE_CARDS = 'RECEIVE_CARDS';
+export const receiveCards = cards => ({
+  type: RECEIVE_CARDS,
+  cards,
+});
+
 export const ERROR = 'ERROR';
 export const dispatchError = error => ({
   type: ERROR,

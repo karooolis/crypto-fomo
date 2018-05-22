@@ -12,8 +12,7 @@
   cursor: pointer;
 }
 
-.name,
-.symbol {
-  padding: 5px 10px;
+.name {
+  padding: 15px 10px;
   font-size: 0.75rem;
 }

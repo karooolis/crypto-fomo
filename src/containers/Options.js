@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Fuse from 'fuse.js';
+import { receiveCards } from '../actions';
 import styles from './Options.css';
 
 class Options extends Component {
@@ -12,7 +14,7 @@ class Options extends Component {
     }
   }
 
-  state = { cards: [], clicked: false };
+  state = { clicked: false };
 
   init = () => {
     const options = {
@@ -25,7 +27,7 @@ class Options extends Component {
 
   search = () => {
     const cards = this.fuse.search(this.props.coin);
-    this.setState({ cards });
+    this.props.receiveCards(cards);
   };
 
   componentDidUpdate = prevProps => {
@@ -45,17 +47,19 @@ class Options extends Component {
   render() {
     return (
       <ul className={styles.list}>
-        {this.state.cards.map(coin => (
+        {this.props.cards.map(coin => (
           <li
             className={styles.card}
             key={coin.id}
             onClick={() => {
-              this.setState({ cards: [], clicked: true });
+              this.setState({ clicked: true });
+              this.props.receiveCards([]);
               this.props.onClick(coin.name);
             }}
           >
-            <p className={styles.name}>{coin.name}</p>
-            <p className={styles.symbol}>{coin.symbol}</p>
+            <p className={styles.name}>
+              {coin.name} ({coin.symbol})
+            </p>
           </li>
         ))}
       </ul>
@@ -63,6 +67,7 @@ class Options extends Component {
   }
 }
 
-const mapStateToProps = ({ coins }) => ({ coins });
+const mapStateToProps = ({ coins, cards }) => ({ coins, cards });
+const mapDispatchToProps = dispatch => bindActionCreators({ receiveCards }, dispatch);
 
-export default connect(mapStateToProps)(Options);
+export default connect(mapStateToProps, mapDispatchToProps)(Options);

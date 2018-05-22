@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-grid-system';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { receiveCards } from '../actions';
 import money from '../img/money.png';
 import Options from '../containers/Options';
 import Footer from '../containers/Footer';
 import styles from './Home.css';
 
 class Home extends Component {
-  state = { coins: [], coin: 'Bitcoin', date: '2017-01-01', amount: '1000' };
+  state = { coin: 'Bitcoin', date: '2017-01-01', amount: '1000' };
 
   handleChange = event => {
     const target = event.target;
@@ -17,6 +20,21 @@ class Home extends Component {
     this.setState({
       [name]: value,
     });
+  };
+
+  handleFocus = event => {
+    const cards = this.props.coins
+      .filter(coin =>
+        ['BTC', 'ETH', 'LTC', 'XMR', 'XRP', 'BCH', 'EOS', 'LTC', 'XLM', 'TRX', 'MIOTA', 'NEO', 'DASH', 'XEM'].includes(coin.symbol)
+      )
+      .sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
+    this.props.receiveCards(cards);
+
+    console.log(cards);
   };
 
   render() {
@@ -38,7 +56,7 @@ class Home extends Component {
             <div className={styles.filler}>in</div>
           </Col>
           <Col sm={3} className="text-center">
-            <input type="text" name="coin" value={this.state.coin} onChange={this.handleChange} />
+            <input type="text" name="coin" value={this.state.coin} onChange={this.handleChange} onFocus={this.handleFocus} />
             <p className={styles.example}>Example - BTC, Bitcoin</p>
           </Col>
           <Col sm={1} className="text-center">
@@ -67,4 +85,7 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = ({ coins }) => ({ coins });
+const mapDispatchToProps = dispatch => bindActionCreators({ receiveCards }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
