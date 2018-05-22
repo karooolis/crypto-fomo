@@ -35,9 +35,9 @@ class Home extends Component {
     this.props.receiveCards(cards);
   };
 
-  handleBlur = event => {
+  componentWillUnmount() {
     this.props.receiveCards([]);
-  };
+  }
 
   render() {
     return (
@@ -58,14 +58,7 @@ class Home extends Component {
             <div className={styles.filler}>in</div>
           </Col>
           <Col sm={3} className="text-center">
-            <input
-              type="text"
-              name="coin"
-              value={this.state.coin}
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-            />
+            <input type="text" name="coin" value={this.state.coin} onChange={this.handleChange} onFocus={this.handleFocus} />
             <p className={styles.example}>Example - BTC, Bitcoin</p>
           </Col>
           <Col sm={1} className="text-center">

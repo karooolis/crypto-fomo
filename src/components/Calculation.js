@@ -7,7 +7,7 @@ import fontawesome from '@fortawesome/fontawesome';
 import { faTwitter } from '@fortawesome/fontawesome-free-brands';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
-import { fetchCoin, dispatchError, receiveCoin } from '../actions';
+import { fetchCoin, receiveError, receiveCoin } from '../actions';
 import FallingMoney from '../containers/FallingMoney';
 import Affiliate from '../containers/Affiliate';
 import styles from './Calculation.css';
@@ -32,11 +32,14 @@ class Calculation extends Component {
     const ts = Math.floor(date / 1000);
 
     if (ts > Math.floor(new Date() / 1000)) {
-      this.props.dispatchError('Future dates are invalid');
-      return;
+      return this.props.receiveError('Future dates are invalid');
     }
 
     const coin = _.find(this.props.coins, { name: params.coin });
+
+    if (!coin) {
+      return this.props.receiveError('Invalid coin');
+    }
 
     this.props.fetchCoin(coin.symbol, ts);
     this.setState({ coinsFetched: true });
@@ -67,7 +70,7 @@ class Calculation extends Component {
     if (this.props.coin.past && this.props.coin.current && !this.state.roiCalculated) {
       this.calculateRoi();
     } else if (this.props.coin.past === 0 || this.props.coin.current === 0) {
-      this.props.dispatchError('Date too early');
+      this.props.receiveError('Date too early');
     }
   };
 
@@ -80,7 +83,7 @@ class Calculation extends Component {
     });
 
     this.props.receiveCoin(null, null);
-    this.props.dispatchError(null);
+    this.props.receiveError(null);
   }
 
   renderHeader() {
@@ -169,6 +172,6 @@ class Calculation extends Component {
 }
 
 const mapStateToProps = ({ coins, coin, error }) => ({ coins, coin, error });
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoin, dispatchError, receiveCoin }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchCoin, receiveError, receiveCoin }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calculation);

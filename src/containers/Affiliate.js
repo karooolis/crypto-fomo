@@ -7,7 +7,7 @@ const Affiliate = () => {
       <marquee direction="right">
         <p>
           👉{' '}
-          <a href="bit.ly/2KGoLgg" target="_blank">
+          <a href="http://bit.ly/2KGoLgg" target="_blank">
             <span className={styles.link}>Buy Bitcoin with a credit card</span> 💰
           </a>
         </p>

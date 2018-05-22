@@ -30,6 +30,10 @@ class Options extends Component {
     this.props.receiveCards(cards);
   };
 
+  handleClickOutside = () => {
+    this.props.receiveCards([]);
+  };
+
   componentDidUpdate = prevProps => {
     if (!prevProps.coins.length && this.props.coins.length) {
       this.init();

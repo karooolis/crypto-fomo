@@ -22,7 +22,7 @@ export const receiveCards = cards => ({
 });
 
 export const ERROR = 'ERROR';
-export const dispatchError = error => ({
+export const receiveError = error => ({
   type: ERROR,
   error,
 });
@@ -31,7 +31,7 @@ export const fetchCoins = () => dispatch =>
   fetch('https://api.coinmarketcap.com/v2/listings/')
     .then(res => res.json())
     .then(json => dispatch(receiveCoins(json.data)))
-    .catch(err => dispatch(dispatchError(err)));
+    .catch(err => dispatch(receiveError(err)));
 
 export const fetchCoin = (symbol, timestamp) => dispatch => {
   let fetchPastPrice = fetch(
@@ -50,5 +50,5 @@ export const fetchCoin = (symbol, timestamp) => dispatch => {
 
   return Promise.all([fetchPastPrice, fetchCurrentPrice])
     .then(([past, current]) => dispatch(receiveCoin(past, current)))
-    .catch(err => dispatch(dispatchError(err)));
+    .catch(err => dispatch(receiveError(err)));
 };
