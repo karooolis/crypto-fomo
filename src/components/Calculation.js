@@ -117,14 +117,14 @@ class Calculation extends Component {
       if (this.state.roi >= 0) {
         const twitterStr = `Investing $${params.amount} in ${this.state.coin} on 📅${params.date} would have made $${
           this.state.netProfit
-        } 💸which is a ${this.state.roi}% on ROI 📈See more on ${window.location.href} 🎉#FOMO #${this.state.coin} #crypto #ToTheMoon`;
+        } 💸which is a ${this.state.roi}% ROI 📈See more on ${window.location.href} 🎉#FOMO #${this.state.coin} #crypto #ToTheMoon`;
 
         return (
           <h1 className={styles.header}>
             Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{this.state.coin}</span> on{' '}
             <span className={styles.span}>{params.date}</span> would have made{' '}
             <span className={styles.span}>${this.state.netProfit} 💸</span> which is a{' '}
-            <span className={styles.span}>{this.state.roi}% 📈</span> on ROI.
+            <span className={styles.span}>{this.state.roi}% 📈</span> ROI.
             <a
               className="twitter-share-button"
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
