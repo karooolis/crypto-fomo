@@ -25,7 +25,7 @@ class Home extends Component {
   handleFocus = event => {
     const cards = this.props.coins
       .filter(coin =>
-        ['BTC', 'ETH', 'LTC', 'XMR', 'XRP', 'BCH', 'EOS', 'LTC', 'XLM', 'TRX', 'MIOTA', 'NEO', 'DASH', 'XEM'].includes(coin.symbol)
+        ['BTC', 'ETH', 'XVG', 'LTC', 'XMR', 'XRP', 'BCH', 'EOS', 'LTC', 'XLM', 'TRX', 'MIOTA', 'NEO', 'DASH', 'XEM'].includes(coin.symbol)
       )
       .sort((a, b) => {
         if (a.name < b.name) return -1;

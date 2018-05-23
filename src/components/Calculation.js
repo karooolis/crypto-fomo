@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import fontawesome from '@fortawesome/fontawesome';
 import { faTwitter } from '@fortawesome/fontawesome-free-brands';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { fetchCoin, receiveError, receiveCoin } from '../actions';
 import FallingMoney from '../containers/FallingMoney';
@@ -15,7 +16,11 @@ import styles from './Calculation.css';
 fontawesome.library.add(faTwitter);
 
 class Calculation extends Component {
-  state = { roi: 0, netProfit: 0, coinsFetched: false, roiCalculated: false };
+  constructor(props) {
+    super(props);
+  }
+
+  state = { roi: 0, netProfit: 0, coinsFetched: false, coin: this.props.match.params, roiCalculated: false };
 
   componentDidMount = () => {
     if (this.props.coins.length) {
@@ -35,10 +40,23 @@ class Calculation extends Component {
       return this.props.receiveError('Future dates are invalid');
     }
 
-    const coin = _.find(this.props.coins, { name: params.coin });
+    let coin = _.find(this.props.coins, { name: params.coin });
 
     if (!coin) {
-      return this.props.receiveError('Invalid coin');
+      const options = {
+        shouldSort: true,
+        threshold: 0.2,
+        keys: ['name', 'symbol'],
+      };
+      const fuse = new Fuse(this.props.coins, options);
+      const coinsSearch = fuse.search(params.coin);
+
+      if (coinsSearch.length) {
+        coin = coinsSearch[0];
+        this.setState({ coin: coin.name });
+      } else {
+        return this.props.receiveError('Invalid coin');
+      }
     }
 
     this.props.fetchCoin(coin.symbol, ts);
@@ -97,13 +115,13 @@ class Calculation extends Component {
       return <h1 className={styles.header}>Loading...</h1>;
     } else {
       if (this.state.roi >= 0) {
-        const twitterStr = `Investing $${params.amount} in ${params.coin} on 📅${params.date} would have made $${
+        const twitterStr = `Investing $${params.amount} in ${this.state.coin} on 📅${params.date} would have made $${
           this.state.netProfit
-        } 💸which is a ${this.state.roi}% on ROI 📈See more on ${window.location.href} 🎉#FOMO #${params.coin} #crypto #ToTheMoon`;
+        } 💸which is a ${this.state.roi}% on ROI 📈See more on ${window.location.href} 🎉#FOMO #${this.state.coin} #crypto #ToTheMoon`;
 
         return (
           <h1 className={styles.header}>
-            Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{params.coin}</span> on{' '}
+            Investing <span className={styles.span}>${params.amount}</span> in <span className={styles.span}>{this.state.coin}</span> on{' '}
             <span className={styles.span}>{params.date}</span> would have made{' '}
             <span className={styles.span}>${this.state.netProfit} 💸</span> which is a{' '}
             <span className={styles.span}>{this.state.roi}% 📈</span> on ROI.
@@ -117,8 +135,8 @@ class Calculation extends Component {
           </h1>
         );
       } else {
-        const twitterStr = `Phew. I got lucky! 🎉Investing $${params.amount} in ${params.coin} on 📅$
-          {params.date
+        const twitterStr = `Phew. I got lucky! 🎉Investing $${params.amount} in ${this.state.coin} on 📅 ${
+          params.date
         } would have made me lose ${this.state.netProfit} bucks 💸That's a ${this.state.roi}% loss 📉See more on ${
           window.location.href
         } #FOMO #${params.coin} #crypto #CryptoBubble`;
@@ -126,8 +144,8 @@ class Calculation extends Component {
         return (
           <h1 className={styles.header}>
             Phew. I got lucky! 🎉 Investing <span className={styles.span}>${params.amount}</span> in{' '}
-            <span className={styles.span}>{params.coin}</span> on <span className={styles.span}>{params.date}</span> would have made me lose{' '}
-            <span className={styles.span}>{Math.abs(this.state.netProfit)}</span> bucks. That's a{' '}
+            <span className={styles.span}>{this.state.coin}</span> on <span className={styles.span}>{params.date}</span> would have made me
+            lose <span className={styles.span}>{Math.abs(this.state.netProfit)}</span> bucks. That's a{' '}
             <span className={styles.span}>{this.state.roi}%</span> loss.{' '}
             <a
               className="twitter-share-button"
