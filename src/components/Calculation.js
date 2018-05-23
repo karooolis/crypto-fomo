@@ -20,7 +20,7 @@ class Calculation extends Component {
     super(props);
   }
 
-  state = { roi: 0, netProfit: 0, coinsFetched: false, coin: this.props.match.params, roiCalculated: false };
+  state = { roi: 0, netProfit: 0, coinsFetched: false, coin: this.props.match.params.coin, roiCalculated: false };
 
   componentDidMount = () => {
     if (this.props.coins.length) {
