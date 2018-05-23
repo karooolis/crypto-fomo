@@ -10,7 +10,16 @@ import Footer from '../containers/Footer';
 import styles from './Home.css';
 
 class Home extends Component {
-  state = { coin: 'Bitcoin', date: '2017-01-01', amount: '1000' };
+  constructor(props) {
+    super(props);
+
+    let today = new Date();
+    let dd = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+    let mm = today.getMonth() + 1 < 10 ? `0${today.getMonth() + 1}` : today.getMonth();
+    let yyyy = today.getFullYear();
+
+    this.state = { coin: 'Bitcoin', date: '2017-01-01', maxDate: `${yyyy}-${mm}-${dd}`, amount: '1000' };
+  }
 
   handleChange = event => {
     const target = event.target;
@@ -63,7 +72,7 @@ class Home extends Component {
             <div className={styles.filler}>on</div>
           </Col>
           <Col sm={4}>
-            <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
+            <input type="date" name="date" value={this.state.date} max={this.state.maxDate} onChange={this.handleChange} />
           </Col>
         </Row>
 
