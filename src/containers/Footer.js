@@ -13,8 +13,8 @@ const Footer = () => {
           </a>
         </p>
         <p>
-          <a href="https://twitter.com/superkarolis" target="_blank">
-            @superkarolis
+          <a href="https://twitter.com/originalkarolis" target="_blank">
+            @originalkarolis
           </a>
         </p>
       </Col>

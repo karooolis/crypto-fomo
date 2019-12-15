@@ -18,7 +18,7 @@ class Home extends Component {
     let mm = today.getMonth() + 1 < 10 ? `0${today.getMonth() + 1}` : today.getMonth();
     let yyyy = today.getFullYear();
 
-    this.state = { coin: 'Bitcoin', date: '2017-01-01', maxDate: `${yyyy}-${mm}-${dd}`, amount: '1000' };
+    this.state = { coin: 'Bitcoin', date: '2019-01-01', maxDate: `${yyyy}-${mm}-${dd}`, amount: '1000' };
   }
 
   handleChange = event => {
