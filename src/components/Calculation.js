@@ -127,7 +127,7 @@ class Calculation extends Component {
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
               target="_blank"
             >
-              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faTwitter} size="2x" style={{marginLeft: 10}} />
             </a>
           </h1>
         );
@@ -149,7 +149,7 @@ class Calculation extends Component {
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
               target="_blank"
             >
-              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faTwitter} size="2x" style={{marginLeft: 10}} />
             </a>
           </h1>
         );
