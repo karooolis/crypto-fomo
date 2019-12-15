@@ -3,17 +3,14 @@ import { Row, Col } from 'react-grid-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import fontawesome from '@fortawesome/fontawesome';
-// import { faTwitter } from '@fortawesome/fontawesome-free-brands';
-// import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Fuse from 'fuse.js';
 import _ from 'lodash';
 import { fetchCoin, receiveError, receiveCoin } from '../actions';
 import FallingMoney from '../containers/FallingMoney';
 import Affiliate from '../containers/Affiliate';
 import styles from './Calculation.module.css';
-
-// fontawesome.library.add(faTwitter);
 
 class Calculation extends Component {
   constructor(props) {
@@ -117,7 +114,7 @@ class Calculation extends Component {
       if (this.state.roi >= 0) {
         const twitterStr = `Investing $${params.amount} in ${this.state.coin} on 📅${params.date} would have made $${
           this.state.netProfit
-        } 💸which is a ${this.state.roi}% ROI 📈See more on ${window.location.href} 🎉#FOMO #${this.state.coin} #crypto #ToTheMoon`;
+          } 💸which is a ${this.state.roi}% ROI 📈See more on ${window.location.href} 🎉#FOMO #${this.state.coin} #crypto #ToTheMoon`;
 
         return (
           <h1 className={styles.header}>
@@ -130,16 +127,16 @@ class Calculation extends Component {
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
               target="_blank"
             >
-              {/* <FontAwesomeIcon className={styles.svg} icon={['fab', 'twitter']} /> */}
+              <FontAwesomeIcon icon={faTwitter} />
             </a>
           </h1>
         );
       } else {
         const twitterStr = `Phew. I got lucky! 🎉Investing $${params.amount} in ${this.state.coin} on 📅 ${
           params.date
-        } would have made me lose ${this.state.netProfit} bucks 💸That's a ${this.state.roi}% loss 📉See more on ${
+          } would have made me lose ${this.state.netProfit} bucks 💸That's a ${this.state.roi}% loss 📉See more on ${
           window.location.href
-        } #FOMO #${params.coin} #crypto #CryptoBubble`;
+          } #FOMO #${params.coin} #crypto #CryptoBubble`;
 
         return (
           <h1 className={styles.header}>
@@ -152,7 +149,7 @@ class Calculation extends Component {
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterStr)}`}
               target="_blank"
             >
-              {/* <FontAwesomeIcon className={styles.svg} icon={['fab', 'twitter']} /> */}
+              <FontAwesomeIcon icon={faTwitter} />
             </a>
           </h1>
         );
