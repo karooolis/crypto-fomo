@@ -1,0 +1,10 @@
+.footer {
+  margin-top: 3rem;
+  text-align: right;
+}
+
+p,
+a {
+  margin-bottom: 0;
+  font-size: 0.75rem;
+}
